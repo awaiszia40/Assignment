@@ -1,0 +1,85 @@
+import java.util.Scanner;
+
+public class Bookingaseat {
+public static void main(String[] args) {
+   int ROWS = 5;  
+   int COLUMNS = 5; 
+  char[][] seats = new char[ROWS][COLUMNS]; 
+ Scanner scanner = new Scanner(System.in);
+ while (true) {
+            displaySeatingChart();
+            System.out.println("Options:");
+            System.out.println("1. Book a seat");
+            System.out.println("2. Cancel a booking");
+            System.out.println("0. Exit");
+            System.out.print("Choose an option: ");
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    bookSeat(scanner);
+                    break;
+                case 2:
+                    cancelBooking(scanner);
+                    break;
+                case 0:
+                    System.out.println("Thank you for booking a seat");
+                    scanner.close();
+                    return; 
+                default:
+                    System.out.println("Invalid option.");
+            }
+        }
+    }
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLUMNS; j++) {
+                seats[i][j] = 'O'; 
+            }
+        }
+    }
+ System.out.println("\nSeating Chart:");
+        System.out.print("   "); 
+        for (int j = 1; j <= COLUMNS; j++) {
+            System.out.print(j + " "); 
+        }
+        System.out.println();
+
+        for (int i = 0; i < ROWS; i++) {
+            System.out.print((i + 1) + " "); 
+            for (int j = 0; j < COLUMNS; j++) {
+                System.out.print(seats[i][j] + " "); 
+            }
+            System.out.println();
+        }
+    }
+  System.out.print("Enter row (1-" + ROWS + ") and column (1-" + COLUMNS + ") to book a seat: ");
+        int row = scanner.nextInt();
+        int col = scanner.nextInt();
+
+        if (row >= 1 && row <= ROWS && col >= 1 && col <= COLUMNS) {
+            if (seats[row - 1][col - 1] == 'O') {
+                seats[row - 1][col - 1] = 'X'; 
+                System.out.println("Seat booked successfully.");
+            } else {
+                System.out.println("Sorry, that seat is booked.");
+            }
+        } else {
+            System.out.println("Invalid input.");
+        }
+    }
+        System.out.print("Enter row (1-" + ROWS + ") and column (1-" + COLUMNS + ") to cancel a booking: ");
+        int row = scanner.nextInt();
+        int col = scanner.nextInt();
+
+        if (row >= 1 && row <= ROWS && col >= 1 && col <= COLUMNS) {
+            if (seats[row - 1][col - 1] == 'X') {
+                seats[row - 1][col - 1] = 'O'; 
+                System.out.println("Booking canceled.");
+            } else {
+                System.out.println("No booking.");
+            }
+        } else {
+            System.out.println("Invalid input.");
+        }
+    }
+}
